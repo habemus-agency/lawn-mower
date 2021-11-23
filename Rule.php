@@ -1,11 +1,13 @@
 <?php
-namespace LawnMower\Rules;
+namespace LawnMower;
 
-abstract class Rule implements RuleInterface {
+use LawnMower\Components\RuleInterface;
+
+class Rule implements RuleInterface {
     protected $name;
     protected $value;
     protected $params;
-    protected $error_message = '###FIELD## is invalid.';
+    protected $error_message = '###FIELD### is invalid.';
 
     public function setParams(array $params){
         $this->params = $params;
@@ -27,4 +29,8 @@ abstract class Rule implements RuleInterface {
 
 		return $message;
 	}
+
+    public function isValid():bool {
+        return true;
+    }
 }

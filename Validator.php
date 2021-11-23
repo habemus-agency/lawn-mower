@@ -12,8 +12,9 @@ class Validator {
     protected $rules_mapping = [];
     protected $errors_mapping = [];
 
-    public function __construct(){
-        $this->rules_mapping = require_once(__DIR__ .'/RulesMapping.php');
+    public function __construct(array $custom_rules_mapping = []){
+        $rules_mapping = require_once(__DIR__ .'/RulesMapping.php');
+        $this->rules_mapping = array_merge($rules_mapping,$custom_rules_mapping);
     }
 
 
@@ -52,7 +53,9 @@ class Validator {
             }
 			
             if(!$current->isEmpty() and $current->is_valid){
-                $output[$field] = $this->input[$field];
+                if(!$current->isSkippable()){
+                    $output[$field] = $this->input[$field];
+                }
             }
 
 		}
@@ -89,22 +92,27 @@ class Validator {
 
         foreach ($rules as $rule) {
 
-            if($rule instanceof Rules\Rule){
+            if($rule instanceof Rule){
 
                 $list [] = $rule;
 
             }elseif(is_string($rule)){
 
+                if(empty($rule)){
+                    throw new \InvalidArgumentException("Rule is empty.");
+                }
+
                 $params = $this->getRuleParams($rule);
                 $rule_instance = $this->getRuleInstance($rule);
 
-                if(!($rule_instance instanceof Rules\Rule)){
+                if(!($rule_instance instanceof Rule)){
                     throw new \InvalidArgumentException("Rule '$rule' doesn't exist.");
                 }
 
                 $rule_instance->setParams($params);
 
                 $list [] = $rule_instance;
+                
             }else{
                 throw new \InvalidArgumentException("Rule is of invalid type.");
             }
@@ -132,10 +140,8 @@ class Validator {
 
     private function getRuleInstance(string $rule){
 
-        if(!empty($rule)){
-            if(array_key_exists($rule,$this->rules_mapping)){
-                return new $this->rules_mapping[$rule];
-            }
+        if(array_key_exists($rule,$this->rules_mapping)){
+            return new $this->rules_mapping[$rule];
         }
 
         return null;

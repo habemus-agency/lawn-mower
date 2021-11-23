@@ -1,6 +1,7 @@
 <?php
 namespace LawnMower\Rules;
 
+use LawnMower\Rule;
 use LawnMower\Components\File;
 
 class Required extends Rule {

@@ -1,5 +1,5 @@
 <?php
-namespace LawnMower\Rules;
+namespace LawnMower\Components;
 
 interface RuleInterface {
     public function isValid(): bool;
