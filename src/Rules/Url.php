@@ -3,7 +3,7 @@ namespace LawnMower\Rules;
 
 use LawnMower\Rule;
 
-class Alpha extends Rule {
+class Url extends Rule {
 
     /*
     * This pattern is derived from Symfony\Component\Validator\Constraints\UrlValidator (5.0.7).

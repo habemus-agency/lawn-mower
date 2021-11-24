@@ -13,7 +13,7 @@ class Validator {
     protected $errors_mapping = [];
 
     public function __construct(array $custom_rules_mapping = []){
-        $rules_mapping = require_once(__DIR__ .'/RulesMapping.php');
+        $rules_mapping = require(__DIR__ .'/RulesMapping.php');
         $this->rules_mapping = array_merge($rules_mapping,$custom_rules_mapping);
     }
 

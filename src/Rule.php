@@ -9,6 +9,10 @@ class Rule implements RuleInterface {
     protected $params;
     protected $error_message = '###FIELD### is invalid.';
 
+    public function __construct(array $params = []){
+        $this->params = $params;
+    }
+
     public function setParams(array $params){
         $this->params = $params;
     }

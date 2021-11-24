@@ -18,18 +18,22 @@ final class GenericTest extends TestCase {
             'email' => 'alberto.piccolo.developer@gmail.com',
             'url' => 'http://test.it',
             'date' => '2022-03-11',
+            'array' => 5,
+            'date_nulled' => '',
         ]);
 
-        $validatd = $validator->validate([
+        $validated = $validator->validate([
             'name' => 'required|max:25',
             'email' => 'required|email',
             'url' => 'required|url',
-            'date' => 'nullable|date',
+            'date' => 'required|date',
+            'date_nulled' => 'nullable|date',
+            'array' => [
+                'nullable',
+                new LawnMower\Rules\In([2,3,5,6])
+            ],
         ]);
 
-        var_dump($validator->isValid());
-        echo "<pre>";
-        var_dump($validated);
-        echo "</pre>";
+        $this->assertTrue($validator->isValid());
     }
 }
