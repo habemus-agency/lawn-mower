@@ -14,9 +14,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "LawnMower\\": "/"
+            "LawnMower\\": "src/"
         }
     },
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "symfony/mime": "5.2"
+    }
 }
