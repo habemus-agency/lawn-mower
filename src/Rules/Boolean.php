@@ -5,6 +5,8 @@ use LawnMower\Rule;
 
 class Boolean extends Rule {
 
+	protected $error_message = "###FIELD### is not a valid boolean.";
+
     protected $acceptable = [true, false, 0, 1, '0', '1'];
 
     public function isValid():bool {

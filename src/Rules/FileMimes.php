@@ -6,6 +6,8 @@ use LawnMower\Components\File;
 
 class FileMimes extends Rule {
 
+    protected $error_message = "###FIELD### must be a file of type ###PARAMS###";
+
     protected $phpExtensions = [
         'php', 'php3', 'php4', 'php5', 'phtml',
     ];

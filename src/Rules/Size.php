@@ -6,12 +6,18 @@ use LawnMower\Components\File;
 
 class Size extends Rule {
 
+	protected $error_message = "###FIELD### must be of size ###PARAMS###.";
+
     private function getNumber($value){
 		return ($value == (int) $value) ? (int) $value : (float) $value;
 	}
 
     public function isValid():bool {
-        $size = $this->getNumber(array_pop($this->params));
+		if(empty($this->params)){
+			throw new \InvalidArgumentException("Missing params");
+		}
+
+        $size = $this->getNumber($this->params[0]);
 
 		if($this->value instanceof File){
 			return $this->value->getSize() == $size;

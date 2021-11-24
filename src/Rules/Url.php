@@ -5,6 +5,8 @@ use LawnMower\Rule;
 
 class Url extends Rule {
 
+        protected $error_message = "###FIELD### is not a valid url.";
+
     /*
     * This pattern is derived from Symfony\Component\Validator\Constraints\UrlValidator (5.0.7).
     *

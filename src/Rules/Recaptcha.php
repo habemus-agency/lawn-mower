@@ -5,13 +5,14 @@ use LawnMower\Rule;
 
 class Recaptcha extends Rule {
 
+    protected $error_message = "Invalid Recaptcha.";
+
     public function isValid():bool {
+        if(empty($this->params)){
+			throw new \InvalidArgumentException("Missing params");
+		}
 
-        $secret = array_pop($this->params);
-
-        if(empty($secret)){
-            throw new \InvalidArgumentException('Missing secret key');
-        }
+        $secret = $this->params[0];
 
         if(empty($this->value)){
             return false;

@@ -5,6 +5,8 @@ use LawnMower\Rule;
 
 class TypeDate extends Rule {
 
+    protected $error_message = "###FIELD### is not a valid Date.";
+
     public function isValid():bool {
 
         if ($this->value instanceof \DateTimeInterface) {

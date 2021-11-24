@@ -29,7 +29,7 @@ class Rule implements RuleInterface {
 
 		$field = str_replace(['_','-'],' ',$this->name);
 		$message = str_replace('###FIELD###',ucfirst($field),$this->error_message);
-		//$message = str_replace('###PARAMS###',implode(',',$this->params),$message);
+		$message = str_replace('###PARAMS###',implode(',',$this->params),$message);
 
 		return $message;
 	}
