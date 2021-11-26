@@ -49,4 +49,20 @@ class Request {
 
         return $only;
     }
+
+    public function hasPost(){
+        return empty($this->post) == false;
+    }
+
+    public function hasGet(){
+        return empty($this->get) == false;
+    }
+
+    public function hasFiles(){
+        return empty($this->files) == false;
+    }
+
+    public function hasData(){
+        return ($this->hasGet() or $this->hasPost() or $this->hasFiles());
+    }
 }

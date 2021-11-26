@@ -22,24 +22,27 @@ use LawnMower\Request;
 
 $request = new Request();
 
-$valid_data = $request->validate([
-    'field_name' => 'rule_name|other_rule_name:with_param|rule_name',
-    'other_field' => [
-        'rule_name',
-        'some_other_rule',
-        $rule_instance, //instance of LawnMower\Rule::class
+if($request->hasData()){ //or hasPost(), hasGet(), hasFiles()
+
+    $valid_data = $request->validate([
+        'field_name' => 'rule_name|other_rule_name:with_param|rule_name',
+        'other_field' => [
+            'rule_name',
+            'some_other_rule',
+            $rule_instance, //instance of LawnMower\Rule::class
+            ...
+        ],
         ...
-    ],
-    ...
-]);
+    ]);
 
 
-if($request->isValid()){
-    //do stuff
-}else{
-    $errors = $request->errors();
-    $input = $request->all();
-    $specific_fields = $request->only([ 'field_name', 'some_other_field', ... ]);
+    if($request->isValid()){
+        //do stuff
+    }else{
+        $errors = $request->errors();
+        $input = $request->all();
+        $specific_fields = $request->only([ 'field_name', 'some_other_field', ... ]);
+    }
 }
 
 ```
@@ -86,33 +89,28 @@ There are 3 ways to pass `Rules` to `Validator`: let's take a look at a file fie
 ### By string
 
 ```php
-...
 
 $valid_data = $request->validate([
     'file_field' => 'required|file|mimes:pdf,docx'
 ]);
 
-...
 
 ```
 
 ### By array of strings
 
 ```php
-...
 
 $valid_data = $request->validate([
     'file_field' => [ 'required', 'file', 'mimes:pdf,docx' ],
 ]);
 
-...
 
 ```
 
 ### By array of instances (or a mix of strings and instances)
 
 ```php
-...
 
 $valid_data = $request->validate([
     'file_field' => [
@@ -122,7 +120,6 @@ $valid_data = $request->validate([
     ],
 ]);
 
-...
 
 ```
 
@@ -177,5 +174,3 @@ $stored_file = $upload->store("path/to/file/destination"); //stores file and ret
 ```
 
 Package developed by apdev, 2021.
-
-#### current v1.0.0
