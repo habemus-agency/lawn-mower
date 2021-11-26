@@ -23,7 +23,7 @@ use LawnMower\Request;
 $request = new Request();
 
 $valid_data = $request->validate([
-    'field_name' => 'rule_name|othe_rule_name:with_param|rule_name',
+    'field_name' => 'rule_name|other_rule_name:with_param|rule_name',
     'other_field' => [
         'rule_name',
         'some_other_rule',
@@ -176,6 +176,6 @@ $stored_file = $upload->store("path/to/file/destination"); //stores file and ret
 
 ```
 
-Package developer by apdev, 2021.
+Package developed by apdev, 2021.
 
-#### current v1.0
+#### current v1.0.0
