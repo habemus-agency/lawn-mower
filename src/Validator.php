@@ -51,10 +51,14 @@ class Validator {
             if(!$current->is_valid){
                 $this->is_valid = false;
             }
-			
-            if(!$current->isEmpty() and $current->is_valid){
-                if(!$current->isSkippable()){
-                    $output[$field] = $this->input[$field];
+
+            if($current->isPresent()){
+                $output[$field] = $current->getValue();
+            }else{
+                if(!$current->isEmpty() and $current->is_valid){
+                    if(!$current->isSkippable()){
+                        $output[$field] = $this->input[$field];
+                    }
                 }
             }
 

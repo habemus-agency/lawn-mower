@@ -18,6 +18,7 @@ return [
     'max' => \LawnMower\Rules\Maximum::class,
     'min' => \LawnMower\Rules\Minimum::class,
     'numeric' => \LawnMower\Rules\Numeric::class,
+    'present' => \LawnMower\Rules\Present::class,
     'recaptcha' => \LawnMower\Rules\Recaptcha::class,
     'size' => \LawnMower\Rules\Size::class,
     'slug' => \LawnMower\Rules\Slug::class,

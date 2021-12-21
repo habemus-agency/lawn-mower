@@ -5,6 +5,7 @@ use LawnMower\Rules\Required;
 use LawnMower\Rules\Nullable;
 use LawnMower\Rules\Bail;
 use LawnMower\Rules\Recaptcha;
+use LawnMower\Rules\Present;
 
 class Field {
     protected $name = '';
@@ -14,6 +15,7 @@ class Field {
     private $is_bail = false;
     private $is_empty = true;
     private $is_skippable = false;
+    private $is_present = false;
     private $rules = [];
 
     public function __construct(string $name,$value){
@@ -44,6 +46,10 @@ class Field {
             if($rule instanceof Recaptcha){
                 $this->is_skippable = true;
             }
+
+            if($rule instanceof Present){
+                $this->is_present = true;
+            }
         }
     }
 
@@ -70,6 +76,10 @@ class Field {
 
     public function isSkippable(){
         return $this->is_skippable == true;
+    }
+
+    public function isPresent(){
+        return $this->is_present == true;
     }
 
 }

@@ -7,7 +7,7 @@ class Rule implements RuleInterface {
     protected $name;
     protected $value;
     protected $params;
-    protected $error_message = '###FIELD### is invalid.';
+    protected $error_message = '###FIELD### is invalid.';
 
     public function __construct(array $params = []){
         $this->params = $params;
