@@ -9,6 +9,7 @@ use \UnexpectedValueException;
 class FileUpload extends File {
 	//native data
 	protected $name;
+	protected $full_path;
 	protected $tmp_name;
 	protected $type;
 	protected $error;
@@ -18,6 +19,7 @@ class FileUpload extends File {
 	public function __construct(array $php_native_file_data){
 
 		$this->name = '';
+		$this->full_path = '';
 		$this->tmp_name = '';
 		$this->type = '';
 		$this->error = 4;
@@ -26,11 +28,11 @@ class FileUpload extends File {
 
 		foreach ($php_native_file_data as $key => $value) {
 
-			if(!property_exists($this,$key)){
-				return;
+			if(property_exists($this,$key)){
+				$this->{$key} = $value;
 			}
 
-			$this->{$key} = $value;
+			
 		}
 
 		if(!$this->isEmpty()){
