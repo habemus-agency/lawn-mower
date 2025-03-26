@@ -58,6 +58,7 @@ The Request object automatically collects all `$_GET`,`$_POST` and `$_FILES` dat
 *Note: the order is not relevant, all rules are evaluated before execution.*
 
 * **required** - the field must be present and not null, empty string, empty array or empty file.
+* **required_if:*other_field,value(optional)*** - the field is required if *other field* is present and not empty. If *value* is set, the *other_field* must be equal to the value given.
 * **nullable** - the field can be omitted.
 * **bail** - after this filter, stop executing checks as soon as a filter fails.
 * **email** - field must be a valid e-mail.
@@ -82,6 +83,7 @@ The Request object automatically collects all `$_GET`,`$_POST` and `$_FILES` dat
 * **date** - field must be a valid date.
 * **slug** - field must contain only lowercase letters, numbers and `-`.
 * **recaptcha:*secret*** - field is a Google Recaptcha field, if valid it's automatically removed from validated data.
+* **callback** - the callable given in the constructor is called. It must return true if the field is valid or false if not.
 
 
 There are 3 ways to pass `Rules` to `Validator`: let's take a look at a file field.
@@ -173,4 +175,4 @@ $stored_file = $upload->store("path/to/file/destination"); //stores file and ret
 
 ```
 
-Package developed by apdev, 2021.
+Package developed by apdev, 2025.
