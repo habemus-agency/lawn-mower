@@ -1,15 +1,15 @@
 <?php
 namespace LawnMower;
 
-use LawnMower\Components\RuleInterface;
-
-class Rule implements RuleInterface {
+abstract class Rule {
     protected $name;
     protected $value;
     protected $params;
-    protected $requires_fields = false;
+    protected $require_fields = false;
     protected $fields = [];
     protected $error_message = '###FIELD### is invalid.';
+
+    abstract public function isValid():bool;
 
     public function __construct(array $params = []){
         $this->params = $params;
@@ -27,11 +27,15 @@ class Rule implements RuleInterface {
         $this->name = $name;
     }
 
-    public function setFields(&$input){ //TODO: think
+    public function requireFields():bool {
+        return $this->require_fields == true;
+    }
+
+    public function setFields(&$input){ //reference
         $this->fields = $input;
     }
 
-    public function getField($name){
+    public function getField(string $name){
         if(array_key_exists($name,$this->fields)){
             return $this->fields[$name];
         }
@@ -48,7 +52,4 @@ class Rule implements RuleInterface {
 		return $message;
 	}
 
-    public function isValid():bool {
-        return true;
-    }
 }

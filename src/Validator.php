@@ -98,6 +98,10 @@ class Validator {
 
             if($rule instanceof Rule){
 
+                if($rule->requireFields()){
+                    $rule->setFields($this->input);
+                }
+
                 $list [] = $rule;
 
             }elseif(is_string($rule)){
@@ -115,7 +119,7 @@ class Validator {
 
                 $rule_instance->setParams($params);
 
-                if($rule_instance->requires_fields){
+                if($rule_instance->requireFields()){
                     $rule_instance->setFields($this->input);
                 }
 

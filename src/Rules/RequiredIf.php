@@ -4,10 +4,10 @@ namespace LawnMower\Rules;
 use LawnMower\Rule;
 use LawnMower\Components\File;
 
-class Required extends Rule {
+class RequiredIf extends Rule {
 
     protected $error_message = '###FIELD### is required.';
-	protected $requires_fields = true;
+	protected $require_fields = true;
 
     public function isValid():bool {
 
@@ -28,9 +28,19 @@ class Required extends Rule {
 			$this_field->setValue($this->value);
 
 			if(count($this->params) > 1){
-				$other_field_value = $params[1];
+				$compare_value = $this->params[1];
 
-				return $this_field->isValid() && $this->value == $other_field_value; //TODO: expand to data types
+				if($other_field->value instanceof File){
+					if($other_field->value->getFilename() == $compare_value){
+						return $this_field->isValid();
+					}
+				}else{
+					if($other_field->value == $compare_value){
+						return $this_field->isValid();
+					}
+				}
+
+				return true;
 			}
 
 
