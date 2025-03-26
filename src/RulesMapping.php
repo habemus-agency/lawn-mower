@@ -3,6 +3,7 @@
 return [
     'required' => \LawnMower\Rules\Required::class,
     'nullable' => \LawnMower\Rules\Nullable::class,
+    'requiredIf' => \LawnMower\Rules\RequiredIf::class,
     'bail' => \LawnMower\Rules\Bail::class,
     'alpha' => \LawnMower\Rules\Alpha::class,
     'alpha_num' => \LawnMower\Rules\AlphaNum::class,

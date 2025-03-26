@@ -115,6 +115,10 @@ class Validator {
 
                 $rule_instance->setParams($params);
 
+                if($rule_instance->requires_fields){
+                    $rule_instance->setFields($this->input);
+                }
+
                 $list [] = $rule_instance;
                 
             }else{
